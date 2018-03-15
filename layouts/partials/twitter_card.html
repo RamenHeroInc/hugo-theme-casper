@@ -14,7 +14,12 @@
 {{ end }}
 
 <!-- Twitter Card data -->
-<meta name="twitter:title" content="{{ .Title }}"/>
+
+{{if .Params.ogTitle}}
+    <meta name="twitter:title" content="{{ if ne .URL "/" }}{{ .Params.ogTitle }} &middot; {{ end }}{{ .Site.Title }}"/>
+{{else}}
+    <meta name="twitter:title" content="{{ .Title }}"/>
+{{end}}
 <meta name="twitter:description" content="{{if .IsPage}}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}"/>
 <meta name="twitter:site" content="@{{ .Site.Params.twitterName }}"/>
 
